@@ -1,0 +1,31 @@
+# Dependencies
+node_modules/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Build output
+dist/
+
+# TypeScript
+*.tsbuildinfo
+
+# Environment files
+.env
+.env.*
+
+# OS
+.DS_Store
+
+# IDE/editor
+.vscode/
+.idea/
+
+# AWS/SAM local builds
+.aws-sam/
+
+.DS_Store
+
