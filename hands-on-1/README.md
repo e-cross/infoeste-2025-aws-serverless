@@ -24,7 +24,7 @@ Este exercício guia você a criar e testar sua primeira função AWS Lambda usa
 
 ### Passo a passo
 
-1. Criar a função Lambda
+**1. Criar a função Lambda**
 
 - No Console AWS, acesse: Serviços > Lambda > Create function
 - Escolha: Author from scratch
@@ -34,21 +34,21 @@ Este exercício guia você a criar e testar sua primeira função AWS Lambda usa
 - Permissions: deixar selecionada a opção padrão `Create a new role with basic Lambda permissions`
 - Clique em Create function
 
-2. Fazer upload do código (bundle.zip)
+**2. Fazer upload do código (bundle.zip)**
 
 - Na função criada, em Code > Code source > Upload from > .zip file
 - Selecione o arquivo: `CreateShipmentHandler/bundle.zip`
 - Confirme o upload
 - Em Runtime settings, garanta que o Handler seja `index.handler`
 
-3. Ajustar configurações (opcional)
+**3. Ajustar configurações (opcional)**
 
 - General configuration > Edit
 - Memory: 128 MB (padrão)
 - Timeout: 3 segundos (suficiente para este exercício)
 - Save
 
-4. Testar a função
+**4. Testar a função**
 
 - Clique em Test > Test event > Create new event
 - Event name: `create-shipment-test`
@@ -72,11 +72,11 @@ Este exercício guia você a criar e testar sua primeira função AWS Lambda usa
   "createdAt": "2025-01-01T12:34:56.000Z",
   "lastUpdatedAt": "2025-01-01T12:34:56.000Z",
   "destinationCountry": "BR",
-  "orderId": "ORDER-123"
+  "orderId": "123456"
 }
 ```
 
-5. Verificar logs (opcional)
+**5. Verificar logs (opcional)**
 
 - Em Monitor > View CloudWatch Logs
 - Observe registros de execução (início/fim) da sua invocação
