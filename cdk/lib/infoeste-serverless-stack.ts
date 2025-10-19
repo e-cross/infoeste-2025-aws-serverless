@@ -12,7 +12,7 @@ export class InfoesteServerlessStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    // S3 bucket (public read for objects) - Hands-on 3
+    // S3 bucket
     const shipmentsBucket = new s3.Bucket(this, "ShipmentsBucket", {
       bucketName: `infoeste-2025-aws-serverless-${this.account}`,
       blockPublicAccess: new s3.BlockPublicAccess({ blockPublicPolicy: false }),
@@ -21,8 +21,6 @@ export class InfoesteServerlessStack extends cdk.Stack {
       removalPolicy: cdk.RemovalPolicy.DESTROY,
       autoDeleteObjects: true,
     });
-
-    // Allow public read via bucket policy
     shipmentsBucket.addToResourcePolicy(
       new iam.PolicyStatement({
         sid: "AllowPublicRead",
@@ -33,7 +31,14 @@ export class InfoesteServerlessStack extends cdk.Stack {
       })
     );
 
-    // Lambda: CreateShipmentApiHandler (Hands-on 3)
+    // SQS queue
+    const shipmentEventsQueue = new sqs.Queue(this, "ShipmentEventsSQS", {
+      queueName: "ShipmentEventsSQS",
+      visibilityTimeout: cdk.Duration.seconds(60),
+      retentionPeriod: cdk.Duration.days(4),
+    });
+
+    // Lambda functions
     const createShipmentFn = new lambda.Function(
       this,
       "CreateShipmentApiHandlerFn",
@@ -51,31 +56,6 @@ export class InfoesteServerlessStack extends cdk.Stack {
         },
       }
     );
-
-    // Grant permission to put objects in the bucket
-    shipmentsBucket.grantPut(createShipmentFn);
-
-    // HTTP API with POST /shipments integration
-    const httpApi = new apigwv2.HttpApi(this, "ShipmentsHttpApi", {
-      apiName: "Shipments API",
-    });
-    httpApi.addRoutes({
-      path: "/shipments",
-      methods: [apigwv2.HttpMethod.POST],
-      integration: new integrations.HttpLambdaIntegration(
-        "CreateShipmentIntegration",
-        createShipmentFn
-      ),
-    });
-
-    // SQS queue (Hands-on 4)
-    const shipmentEventsQueue = new sqs.Queue(this, "ShipmentEventsSQS", {
-      queueName: "ShipmentEventsSQS",
-      visibilityTimeout: cdk.Duration.seconds(60),
-      retentionPeriod: cdk.Duration.days(4),
-    });
-
-    // Lambda: IdentifyNewTrackingsHandler (producer)
     const identifyFn = new lambda.Function(
       this,
       "IdentifyNewTrackingsHandlerFn",
@@ -93,11 +73,6 @@ export class InfoesteServerlessStack extends cdk.Stack {
         },
       }
     );
-
-    // Grant permission to send messages to the queue
-    shipmentEventsQueue.grantSendMessages(identifyFn);
-
-    // Lambda: ProcessTrackingHandler (consumer)
     const processFn = new lambda.Function(this, "ProcessTrackingHandlerFn", {
       functionName: "ProcessTrackingHandler",
       runtime: lambda.Runtime.NODEJS_22_X,
@@ -112,10 +87,28 @@ export class InfoesteServerlessStack extends cdk.Stack {
       },
     });
 
-    // Grant permission to read and write objects in the bucket
-    shipmentsBucket.grantReadWrite(processFn);
+    // API Gateway
+    const httpApi = new apigwv2.HttpApi(this, "ShipmentsHttpApi", {
+      apiName: "Shipments API",
+    });
+    httpApi.addRoutes({
+      path: "/shipments",
+      methods: [apigwv2.HttpMethod.POST],
+      integration: new integrations.HttpLambdaIntegration(
+        "CreateShipmentIntegration",
+        createShipmentFn
+      ),
+    });
 
-    // Add event source (SQS -> ProcessTrackingHandler)
+    // S3 permissions
+    shipmentsBucket.grantWrite(createShipmentFn); // CreateShipmentApiHandler can add objects to the bucket
+    shipmentsBucket.grantReadWrite(processFn); // ProcessTrackingHandler can read and write objects to the bucket
+
+    // SQS permissions
+    shipmentEventsQueue.grantSendMessages(identifyFn); // IdentifyNewTrackingsHandler can send messages to the queue
+    shipmentEventsQueue.grantConsumeMessages(processFn); // ProcessTrackingHandler can receive messages from the queue
+
+    // Lambda event source (ShipmentEventsSQS -> ProcessTrackingHandler)
     processFn.addEventSource(
       new lambdaEventSources.SqsEventSource(shipmentEventsQueue, {
         batchSize: 10,

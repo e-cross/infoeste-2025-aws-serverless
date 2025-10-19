@@ -8,6 +8,6 @@ new InfoesteServerlessStack(app, "InfoesteServerlessStack", {
   env: {
     // Use default account/region from environment
     account: process.env.CDK_DEFAULT_ACCOUNT,
-    region: process.env.CDK_DEFAULT_REGION || "us-east-1",
+    region: "us-west-2",
   },
 });

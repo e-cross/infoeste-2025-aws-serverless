@@ -25,7 +25,7 @@ npm run build && npx cdk synth
 3. Deploy
 
 ```bash
-npx cdk bootstrap
+npx cdk bootstrap # somente a primeira vez
 npx cdk deploy
 ```
 
