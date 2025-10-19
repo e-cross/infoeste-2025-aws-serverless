@@ -9,7 +9,6 @@ pnpm-debug.log*
 
 # Build output
 dist/
-bundle.zip
 
 # TypeScript
 *.tsbuildinfo
