@@ -89,6 +89,11 @@ Este exercício guia você a criar e testar sua primeira função AWS Lambda usa
 - Estrutura do zip: o `bundle.zip` já está pronto; não recompacte pastas extras
 - Runtime incompatível: use Node.js 22.x (compatível com `crypto.randomUUID`)
 
-### Limpeza (opcional)
+---
 
-- Exclua a função ao finalizar o exercício
+### Pontos para discussão
+
+- Variáveis de ambiente
+- Memória e timeout
+- Cold start e provisioned concurrency
+- Versões e aliases

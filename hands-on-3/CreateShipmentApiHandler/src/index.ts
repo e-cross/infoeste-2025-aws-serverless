@@ -34,7 +34,6 @@ function corsHeaders(): Record<string, string> {
 const s3Client = new S3Client({
   region: process.env.AWS_REGION || "us-east-1",
 });
-const bucketName = "infoeste-2025-aws-serverless-saab";
 
 export const handler: Handler<
   APIGatewayProxyEventV2,
@@ -44,6 +43,24 @@ export const handler: Handler<
   _context: Context
 ): Promise<APIGatewayProxyStructuredResultV2> => {
   console.log("Event: ", event);
+
+  // Resolve bucket name from environment variable for flexibility across accounts/students
+  const bucketName = process.env.SHIPMENTS_BUCKET_NAME;
+
+  // Ensure environment variable is configured
+  if (!bucketName) {
+    console.error(
+      "Environment variable SHIPMENTS_BUCKET_NAME is not configured."
+    );
+    return {
+      statusCode: 500,
+      headers: { ...corsHeaders(), "Content-Type": "application/json" },
+      body: JSON.stringify({
+        message:
+          "Server misconfiguration: SHIPMENTS_BUCKET_NAME env var is required.",
+      }),
+    };
+  }
 
   // Parse and validate input
   let input: CreateShipmentInput | null = null;
