@@ -17,6 +17,23 @@ Todos os códigos das funções estão em **Inglês**, enquanto que toda a docum
 
 Para estudantes e profissionais que desejam aprender, na prática, os principais serviços Serverless da AWS e como eles se conectam para remover a complexidade de infraestrutura gerenciada e permitir os desenvolvedores focarem no que importa, o produto e o problema que ele resolve!
 
+### Conta AWS dedicada para o minicurso
+
+Através da parceria entre e-CROSS e AWS todos os participantes do minicurso terão acesso a uma conta AWS totalmente gratuita durante o período do curso!
+
+Para resgatar sua conta realize os passos abaixo.
+
+- Acesse o link https://catalog.us-east-1.prod.workshops.aws/join?access-code=ef7a-0179d6-0a
+- Selecione o método de autenticação "E-mail one time password"
+  ![](https://static.us-east-1.prod.workshops.aws/public/31e40059-5564-4343-b813-d5c1c843b30b/static/hosted-event/setup-hosted-event-1.png)
+- Digite o seu e-mail e solicite o código de acesso
+  ![](https://static.us-east-1.prod.workshops.aws/public/31e40059-5564-4343-b813-d5c1c843b30b/static/hosted-event/setup-hosted-event-2.png)
+- Cheque o e-mail e digite o código de acesso recebido
+  ![](https://static.us-east-1.prod.workshops.aws/public/31e40059-5564-4343-b813-d5c1c843b30b/static/hosted-event/setup-hosted-event-3.png)
+- Aceite os termos e condições e entre no evento
+- Acesse a conta através do menu no canto inferior esquerdo, no link Open AWS console
+  ![](https://static.us-east-1.prod.workshops.aws/public/31e40059-5564-4343-b813-d5c1c843b30b/static/hosted-event/setup-hosted-event-8.png)
+
 ### Dúvidas e feedback 🙋
 
 Abra uma Issue com sua pergunta ou sugestão e fique a vontade para mandar PRs se achar bugs.
