@@ -14,7 +14,7 @@ Neste exercício você criará um bucket no Amazon S3, com leitura pública, con
 #### Pré‑requisitos
 
 - Ter concluído o Hands-on 2 (API disponível)
-- Região: `us-east-1`
+- Região: `us-west-2`
 
 #### Arquivos fornecidos
 
