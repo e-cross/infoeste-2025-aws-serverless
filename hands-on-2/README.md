@@ -14,7 +14,7 @@ Neste exercício você criará uma função Lambda para servir como backend HTTP
 
 - Conta AWS individual com acesso ao console
 - Permissão para criar Lambda, API Gateway (HTTP API) e CloudWatch Logs
-- Região: `us-east-1`
+- Região: `us-west-2`
 
 #### Arquivos fornecidos
 
