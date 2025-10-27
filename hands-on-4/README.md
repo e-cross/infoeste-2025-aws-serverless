@@ -15,7 +15,7 @@ Neste exercício você criará uma fila SQS para desacoplar os processos de iden
 
 - Ter concluído o Hands-on 3 (bucket S3 criado e `CreateShipmentApiHandler` funcional)
 - Possuir ao menos um `shipmentId` gerado anteriormente
-- Região: `us-east-1`
+- Região: `us-west-2`
 
 #### Arquivos fornecidos
 
