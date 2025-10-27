@@ -13,7 +13,7 @@ Este exercício guia você a criar e testar sua primeira função AWS Lambda usa
 
 - Conta AWS individual com acesso ao console
 - Permissão para criar Lambda e função de execução básica (CloudWatch Logs)
-- Região: `us-east-1`
+- Região: `us-west-2`
 
 #### Arquivos fornecidos
 
