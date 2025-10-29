@@ -23,7 +23,7 @@ Através da parceria entre e-CROSS e AWS todos os participantes do minicurso ter
 
 Para resgatar sua conta realize os passos abaixo.
 
-- Acesse o link https://catalog.us-east-1.prod.workshops.aws/join?access-code=ef7a-0179d6-0a
+- Acesse o link https://catalog.us-east-1.prod.workshops.aws/join?access-code={accesscode}
 - Revise e aceite os termos e condições
 - Selecione o método de autenticação "E-mail one time password"
   ![](https://static.us-east-1.prod.workshops.aws/public/31e40059-5564-4343-b813-d5c1c843b30b/static/hosted-event/setup-hosted-event-1.png)
